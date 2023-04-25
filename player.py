@@ -18,16 +18,16 @@ class Player:
 
     def get_input(self, event):
         if event.key == pygame.K_w or event.key == pygame.K_UP:
-            if not self.neck.collide_point(self.position - y_unit):
+            if not self.neck.collide_point(mod(self.position - y_unit)):
                 self.direction = "up"
         if event.key == pygame.K_s or event.key == pygame.K_DOWN:
-            if not self.neck.collide_point(self.position + y_unit):
+            if not self.neck.collide_point(mod(self.position + y_unit)):
                 self.direction = "down"
         if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-            if not self.neck.collide_point(self.position - x_unit):
+            if not self.neck.collide_point(mod(self.position - x_unit)):
                 self.direction = "left"
         if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-            if not self.neck.collide_point(self.position + x_unit):
+            if not self.neck.collide_point(mod(self.position + x_unit)):
                 self.direction = "right"  
 
     def update(self, delta, food_manager):
@@ -39,13 +39,13 @@ class Player:
             moved = True
             match self.direction:
                 case "left":
-                    self.position = self.position - x_unit
+                    self.position = mod(self.position - x_unit)
                 case "right":
-                    self.position = self.position + x_unit
+                    self.position = mod(self.position + x_unit)
                 case "up":
-                    self.position = self.position - y_unit
+                    self.position = mod(self.position - y_unit)
                 case "down":
-                    self.poition = self.position + y_unit
+                    self.position = mod(self.position + y_unit)
                 case _:
                     moved = False
             if moved:
@@ -77,6 +77,7 @@ class Player:
     
     def move(self):
         del self.body[-1]
+        self.position = mod(self.position)
         self.body.insert(0, Body(self.position))
         self.update_head()
         

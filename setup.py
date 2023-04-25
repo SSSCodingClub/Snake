@@ -31,3 +31,7 @@ BLUE = (18, 82, 170)
 LIGHT_BLUE = (10, 37, 211)
 DARK_BLUE = (8, 25, 137)
 YELLOW = (221, 219, 84)
+
+
+def mod(pos):
+    return pygame.Vector2(pos.x % dimensions.x, pos.y % dimensions.y)
